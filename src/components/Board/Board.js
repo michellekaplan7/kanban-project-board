@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import initialData from "../../initial-data";
-import Column from "../Column/Column";
+import InnerColumnList from "../InnerColumnList/InnerColumnList";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
@@ -103,15 +103,12 @@ class Board extends Component {
             <Container {...provided.droppableProps} ref={provided.innerRef}>
               {this.state.columnOrder.map((columnId, index) => {
                 const column = this.state.columns[columnId];
-                const tasks = column.taskIds.map(
-                  (taskId) => this.state.tasks[taskId]
-                );
 
                 return (
-                  <Column
+                  <InnerColumnList
                     key={column.id}
                     column={column}
-                    tasks={tasks}
+                    taskMap={this.state.tasks}
                     index={index}
                   />
                 );
