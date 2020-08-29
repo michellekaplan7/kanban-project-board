@@ -10,7 +10,6 @@ const Container = styled.div`
   background-color: white;
   border-radius: 2px;
   width: 220px;
-
   display: flex;
   flex-direction: column;
 `;
@@ -21,7 +20,7 @@ const TaskList = styled.div`
   padding: 8px;
   transition: background-color 0.2s ease;
   background-color: ${(props) =>
-    props.isDraggingOver ? "skyblue" : "inherit"};
+    props.isDraggingOver ? "#b8d0eb" : "#eaf4f4"};
   flex-grow: 1;
   min-height: 100px;
 `;
