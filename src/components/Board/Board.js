@@ -8,6 +8,7 @@ const Container = styled.div`
   display: flex;
 `;
 
+//COMPONENT
 class Board extends Component {
   state = initialData;
 
@@ -113,6 +114,25 @@ class Board extends Component {
     this.setState(newState);
   };
 
+  addNewTaskToColumnList = (userInput) => {
+    let taskCounter = Object.keys(this.state.tasks).length + 1
+    
+    let testObj = {
+      ...this.state.tasks,
+      [`task-${taskCounter}`]: {id: `task-${taskCounter}`, content: userInput.content}
+    }
+    let column = [...this.state.columns[userInput.id].taskIds, `task-${taskCounter}`]
+    let columns = {
+      ...this.state.columns,
+      [userInput.id]: {
+        ...this.state.columns[userInput.id],
+        "taskIds": column
+      }
+    }
+    
+    this.setState({columns: columns, tasks: testObj})
+}
+
   render() {
     return (
       <DragDropContext
@@ -136,6 +156,7 @@ class Board extends Component {
                     column={column}
                     taskMap={this.state.tasks}
                     index={index}
+                    addNewTaskToColumnList={this.addNewTaskToColumnList}
                   />
                 );
               })}
