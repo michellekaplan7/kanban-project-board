@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+// import "./App.css";
+import "@atlaskit/css-reset";
 import Header from "../Header/Header";
 import Landing from "../Landing/Landing";
 import Board from "../Board/Board";
