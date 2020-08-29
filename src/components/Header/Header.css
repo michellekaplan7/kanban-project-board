@@ -1,0 +1,29 @@
+
+.headerLink {
+  color: #b9faf8;
+  display: inline-block;
+  padding: 10px 15px;
+  line-height: 1;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.headerLink:hover {
+ box-shadow: 0 0 0 1px #b8d0eb;
+ color: #b8d0eb;
+ text-decoration: none;
+ border-radius: 2px;
+ font-size: 1.4em;
+}
+
+.headerLink:active {
+  box-shadow: 0 0 0 1px #b8d0eb;
+  outline-color: #b8d0eb;
+ }
+
+ .headerLink:focus {
+  box-shadow: 0 0 0 1px #b8d0eb;
+  outline: none;
+ }
