@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import initialData from "../../initial-data";
 import Column from "../Column/Column";
-import { DragDropContext } from "react-beautiful-dnd";
-import styled from 'styled-components';
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  `;
+`;
 
 class Board extends Component {
   state = initialData;
 
-  onDragEnd = result => {
-    document.body.style.backgroundColor = 'inherit';
+  onDragEnd = (result) => {
+    document.body.style.backgroundColor = "inherit";
 
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if (!destination) {
       return;
@@ -27,6 +27,19 @@ class Board extends Component {
       return;
     }
 
+    if (type === "column") {
+      const newColumnOrder = Array.from(this.state.columnOrder);
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      const newState = {
+        ...this.state,
+        columnOrder: newColumnOrder,
+      };
+      this.setState(newState);
+      return;
+    }
+
     const start = this.state.columns[source.droppableId];
     const finish = this.state.columns[destination.droppableId];
 
@@ -34,12 +47,12 @@ class Board extends Component {
       const newTaskIds = Array.from(start.taskIds);
       newTaskIds.splice(source.index, 1);
       newTaskIds.splice(destination.index, 0, draggableId);
-  
+
       const newColumn = {
-        ...start, 
+        ...start,
         taskIds: newTaskIds,
       };
-  
+
       const newState = {
         ...this.state,
         columns: {
@@ -47,7 +60,7 @@ class Board extends Component {
           [newColumn.id]: newColumn,
         },
       };
-  
+
       this.setState(newState);
       return;
     }
@@ -63,7 +76,7 @@ class Board extends Component {
     const finishTaskIds = Array.from(finish.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
     const newFinish = {
-      ...finish, 
+      ...finish,
       taskIds: finishTaskIds,
     };
 
@@ -81,14 +94,32 @@ class Board extends Component {
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-      <Container>
-      {this.state.columnOrder.map(columnId => {
-      const column = this.state.columns[columnId];
-      const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
+        >
+          {(provided) => (
+            <Container {...provided.droppableProps} ref={provided.innerRef}>
+              {this.state.columnOrder.map((columnId, index) => {
+                const column = this.state.columns[columnId];
+                const tasks = column.taskIds.map(
+                  (taskId) => this.state.tasks[taskId]
+                );
 
-      return <Column key={column.id} column={column} tasks={tasks} />;
-      })}
-      </Container>
+                return (
+                  <Column
+                    key={column.id}
+                    column={column}
+                    tasks={tasks}
+                    index={index}
+                  />
+                );
+              })}
+              {provided.placeholder}
+            </Container>
+          )}
+        </Droppable>
       </DragDropContext>
     );
   }
