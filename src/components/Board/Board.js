@@ -6,6 +6,9 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  background-color: white;
+  justify-content: center;
+  flex-direction: row;
 `;
 
 //COMPONENT

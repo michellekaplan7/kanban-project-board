@@ -36,7 +36,7 @@ background-color: rgba(0,0,0,.1);
 const Header = () => {
   return (
     <Container>
-      <HeaderTitle>MONARCH</HeaderTitle>
+      <HeaderTitle>MONARCH_BOARD</HeaderTitle>
       <NavContainer>
       <Link to="/" className="headerLink">
       home page

@@ -13,7 +13,7 @@ const Body = styled.div`
 background-color: #ecf0f1;
 font-family: helvetica, arial, sans-serif;
 font-size: 16px;
-padding-top: 330px;
+margin-top: 25%;
 @include transition(padding-top .5s ease);
 `;
 function App() {
