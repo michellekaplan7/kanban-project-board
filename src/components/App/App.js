@@ -24,10 +24,10 @@ function App() {
           path="/projectboard"
           render={() => {
             return (
-              <div>
-                {/* <Header /> */}
+              <Body>
+                <Header />
                 <Board />
-              </div>
+              </Body>
             );
           }}
         />
