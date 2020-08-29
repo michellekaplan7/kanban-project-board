@@ -7,6 +7,15 @@ import Board from "../Board/Board";
 
 import { Route, Switch } from "react-router-dom";
 
+import styled from "styled-components";
+
+const Body = styled.div`
+background-color: #ecf0f1;
+font-family: helvetica, arial, sans-serif;
+font-size: 16px;
+padding-top: 330px;
+@include transition(padding-top .5s ease);
+`;
 function App() {
   return (
     <div className="App">
@@ -16,7 +25,7 @@ function App() {
           render={() => {
             return (
               <div>
-                <Header />
+                {/* <Header /> */}
                 <Board />
               </div>
             );
@@ -27,10 +36,10 @@ function App() {
           path="/"
           render={() => {
             return (
-              <div>
+              <Body>
                 <Header />
                 <Landing />
-              </div>
+              </Body>
             );
           }}
         />
