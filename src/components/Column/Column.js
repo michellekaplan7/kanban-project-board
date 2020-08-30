@@ -15,7 +15,7 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   background-color: white;
   border-radius: 2px;
-  width: 250px;
+  width: 350px;
   display: flex;
   flex-direction: column;
 `;
@@ -162,7 +162,7 @@ class Column extends Component {
                   {...provided.droppableProps}
                   isDraggingOver={snapshot.isDraggingOver}
                 >
-                  <InnerList tasks={this.props.tasks} />
+                  <InnerList tasks={this.props.tasks} columnID={this.props.column.id} deleteTask={this.props.deleteTask} />
                   {provided.placeholder}
                 </TaskList>
               )}
