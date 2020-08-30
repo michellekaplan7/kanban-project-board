@@ -4,9 +4,67 @@ import InnerColumnList from "../InnerColumnList/InnerColumnList";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
+//Icons
+import { FiPlus } from 'react-icons/fi';
+
+//Imports
+import Modal from 'react-modal';
+
+const MainContainerToBoard = styled.div`
+display: flex;
+flex-direction: row;
+align-self: center;
+justify-content: center;
+width: 100%;
+`;
+
+const AddColumnContainer = styled.div`
+margin: 2%;
+border: 1px solid lightgrey;
+background-color: #eaf4f4;
+border-radius: 2px;
+width: 15%;
+height: 5em;
+padding: auto;
+display: flex;
+flex-direction: column;
+text-align: center;
+`;
+
 const Container = styled.div`
   display: flex;
+  background-color: white;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid lightgrey;
+  overflow-x: scroll;
+  width: 80%;
 `;
+
+const ButtonWrapper = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 10em;
+`;
+
+const customStyles = {
+  content : {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    alignItems: 'center',
+    top: '40%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    height: '20%',
+    width: '20%' 
+  }
+};
+let subtitle;
 
 //COMPONENT
 class Board extends Component {
@@ -114,6 +172,7 @@ class Board extends Component {
     this.setState(newState);
   };
 
+  // ADD A TASK
   addNewTaskToColumnList = (userInput) => {
     let taskCounter = Object.keys(this.state.tasks).length + 1
     
@@ -131,11 +190,41 @@ class Board extends Component {
     }
     
     this.setState({columns: columns, tasks: testObj})
-}
+  }
+
+  addColumn = () => {
+    this.setState({addColumnModal: !this.state.addColumnModal})
+  }
+
+  handleInput = (e) => {
+    const { value } = e.target
+    this.setState({newColumnInput: value})
+  }
+
+  addNewColumn = () => {
+    let columnName = this.state.newColumnInput
+    let columnCounter = Object.keys(this.state.columns).length + 1
+    let column = {
+      ...this.state.columns,
+     [`column-${columnCounter}`]: {
+      id: `column-${columnCounter}`,
+      title: columnName,
+      taskIds: []
+     }
+    }
+    this.setState({
+      columns: column,
+      columnOrder: [...this.state.columnOrder,`column-${columnCounter}`],
+      addColumnModal:false,
+      newColumnInput: "",
+    })
+  }
+
 
   render() {
     return (
-      <DragDropContext
+      <MainContainerToBoard>
+        <DragDropContext
         onDragStart={this.onDragStart}
         onDragUpdate={this.onDragUpdate}
         onDragEnd={this.onDragEnd}
@@ -165,6 +254,42 @@ class Board extends Component {
           )}
         </Droppable>
       </DragDropContext>
+      <AddColumnContainer>
+        <p style={{ "fontSize": "1.3em", "alignSelf": "center", "textTransform": "uppercase"}} >Add a column</p>
+        <FiPlus style={{"fontSize": "2.5em", "alignSelf": "center"}} onClick={this.addColumn} />
+      </AddColumnContainer>
+      {
+        this.state.addColumnModal
+        &&
+        <Modal
+          isOpen={this.state.addColumnModal}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h2 ref={_subtitle => (subtitle = _subtitle)}>What's up column!</h2>
+          {this.state.errorOnAdd && <p style={{"color": "red"}} >Please enter column title</p>}
+          <label>Enter column title</label>
+          <input
+            placeholder="Enter column title"
+            type="text"
+            onChange={this.handleInput}
+            value={this.state.newColumnInput}
+          />
+          <ButtonWrapper>
+            <input onClick={this.addNewColumn}
+            type="submit"
+            value="add"
+            style={{"margin": "5%", "width": "8em", "height": "2.5em"}}/>
+            <input onClick={this.addColumn}
+            type="submit"
+            value="close"
+            style={{"margin": "5%", "width": "8em", "height": "2.5em"}}/>
+          </ButtonWrapper>
+        </Modal>
+      }
+      </MainContainerToBoard>
     );
   }
 }

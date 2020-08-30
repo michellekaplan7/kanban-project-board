@@ -22,6 +22,8 @@ const initialData = {
             taskIds: [],
         },
     },
+    addColumnModal: false,
+    newColumnInput: "",
     
     // Facilitate reordering of the columns
     columnOrder: ['column-1', 'column-2', 'column-3'],
