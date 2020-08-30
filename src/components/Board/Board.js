@@ -86,11 +86,11 @@ class Board extends Component {
   onDragEnd = (result, provided) => {
     const message = result.destination
       ? `You have moved the task from position ${result.source.index + 1} to ${
-          result.destination.index + 1
-        }`
+      result.destination.index + 1
+      }`
       : `The task has been returned to its starting position of ${
-          result.source.index + 1
-        }`;
+      result.source.index + 1
+      }`;
 
     provided.announce(message);
 
@@ -178,7 +178,7 @@ class Board extends Component {
     
     let testObj = {
       ...this.state.tasks,
-      [`task-${taskCounter}`]: {id: `task-${taskCounter}`, content: userInput.content}
+      [`task-${taskCounter}`]: { id: `task-${taskCounter}`, content: userInput.content }
     }
     let column = [...this.state.columns[userInput.id].taskIds, `task-${taskCounter}`]
     let columns = {
@@ -189,16 +189,16 @@ class Board extends Component {
       }
     }
     
-    this.setState({columns: columns, tasks: testObj})
+    this.setState({ columns: columns, tasks: testObj })
   }
 
   addColumn = () => {
-    this.setState({addColumnModal: !this.state.addColumnModal})
+    this.setState({ addColumnModal: !this.state.addColumnModal })
   }
 
   handleInput = (e) => {
     const { value } = e.target
-    this.setState({newColumnInput: value})
+    this.setState({ newColumnInput: value })
   }
 
   addNewColumn = () => {
@@ -206,16 +206,16 @@ class Board extends Component {
     let columnCounter = Object.keys(this.state.columns).length + 1
     let column = {
       ...this.state.columns,
-     [`column-${columnCounter}`]: {
-      id: `column-${columnCounter}`,
-      title: columnName,
-      taskIds: []
-     }
+      [`column-${columnCounter}`]: {
+        id: `column-${columnCounter}`,
+        title: columnName,
+        taskIds: []
+      }
     }
     this.setState({
       columns: column,
-      columnOrder: [...this.state.columnOrder,`column-${columnCounter}`],
-      addColumnModal:false,
+      columnOrder: [...this.state.columnOrder, `column-${columnCounter}`],
+      addColumnModal: false,
       newColumnInput: "",
     })
   }
@@ -225,18 +225,45 @@ class Board extends Component {
     let object = {}
     for (let key in currentTasks) {
       if (key !== task) {
-        object[key] =  currentTasks[key]
+        object[key] = currentTasks[key]
       }
     }
-    console.log(object);
-    let updatedColumns = {...this.state.columns}
+    let updatedColumns = { ...this.state.columns }
     let filtered = updatedColumns[columnID].taskIds.filter(item => item !== task)
     let newColumns = {
       ...this.state.columns,
     }
     newColumns[columnID].taskIds = filtered
-    this.setState({tasks: object, columns: newColumns})
+    this.setState({ tasks: object, columns: newColumns })
   }
+
+  deleteColumn = (id) => {
+    console.log('column id', id);
+    let tasksToDelete = this.state.columns[id].taskIds
+    // console.log(tasksToDelete);
+    let tasks = { ...this.state.tasks }
+
+
+    let newTasks = {}
+    for (let task in tasks) {
+      if (!tasksToDelete.includes(task)){
+        newTasks[task] = tasks[task]
+      }
+    }
+    let updatedColumns = { ...this.state.columns };
+     let newColumns = {};
+     for (let column in updatedColumns) {
+       if (column !== id) {
+         newColumns[column] = updatedColumns[column];
+       }
+     }
+    
+    let updatedColOrder = [...this.state.columnOrder]
+    let filtered = updatedColOrder.filter(item => item !== id)
+    // console.log('newColumns', newColumns);
+    this.setState({tasks: newTasks, columns: newColumns, columnOrder: filtered})
+  }
+  
 
 
   render() {
@@ -266,6 +293,7 @@ class Board extends Component {
                     index={index}
                     deleteTask={this.deleteTask}
                     addNewTaskToColumnList={this.addNewTaskToColumnList}
+                    deleteColumn={this.deleteColumn}
                   />
                 );
               })}
