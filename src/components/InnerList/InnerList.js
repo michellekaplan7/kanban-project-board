@@ -10,7 +10,7 @@ class InnerList extends Component {
   }
   render() {
     return this.props.tasks.map((task, index) => (
-      <Task key={task.id} task={task} index={index} />
+      <Task key={task.id} task={task} id={this.props.columnID} index={index} deleteTask={this.props.deleteTask} />
     ));
   }
 }
