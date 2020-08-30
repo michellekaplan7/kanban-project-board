@@ -46,6 +46,6 @@ npm install
 
 ## Contributors:
 
-[Quinn Elder] (https://github.com/QuinnrElder)
+[Quinn Elder](https://github.com/QuinnrElder)
 [Michelle Kaplan](https://github.com/MichelleKaplan7)
-[Nick Taylor] (https://github.com/nickstaylor)
+[Nick Taylor](https://github.com/nickstaylor)
