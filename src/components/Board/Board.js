@@ -264,7 +264,13 @@ class Board extends Component {
     this.setState({tasks: newTasks, columns: newColumns, columnOrder: filtered})
   }
   
-
+  changeTitle = (newTitle, columnId) => {
+    console.log('id', columnId);
+    let updatedColumns = { ...this.state.columns };
+    updatedColumns[columnId].title = newTitle
+    console.log('uc', updatedColumns);
+    this.setState({columns: updatedColumns})
+  }
 
   render() {
     console.log(this.state);
@@ -291,6 +297,7 @@ class Board extends Component {
                     column={column}
                     taskMap={this.state.tasks}
                     index={index}
+                    changeTitle={this.changeTitle}
                     deleteTask={this.deleteTask}
                     addNewTaskToColumnList={this.addNewTaskToColumnList}
                     deleteColumn={this.deleteColumn}

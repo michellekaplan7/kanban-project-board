@@ -6,6 +6,8 @@ import InnerList from "../InnerList/InnerList";
 
 //Icons
 import { FiPlus, FiEdit3, FiDelete } from "react-icons/fi";
+import { GiSaveArrow } from "react-icons/gi";
+
 
 //Imports
 import Modal from 'react-modal';
@@ -74,6 +76,8 @@ class Column extends Component {
       deleteColumn: false,
       newTaskInput: "",
       errorOnAdd: false,
+      changeTitle: false,
+      newTitleInput: this.props.column.title
     };
   }
 
@@ -89,6 +93,11 @@ class Column extends Component {
     const { value } = e.target;
     this.setState({ newTaskInput: value });
   };
+
+  handleTitleInput = (e) => {
+     const { value } = e.target;
+     this.setState({ newTitleInput: value });
+  }
 
   closeModal = () => {
     this.setState({ addTaskModal: false, deleteColumn: false });
@@ -115,7 +124,7 @@ class Column extends Component {
   };
 
   editColumnName = () => {
-    console.log("edit column name");
+   this.setState({changeTitle: true})
   };
 
   deleteColumn = () => {
@@ -123,11 +132,10 @@ class Column extends Component {
     console.log("delete column name");
   };
 
-
-  // deleteColumnFinal = () => {
-  //   console.log("delete column final");
-  //   this.props.deleteColumn()    
-  // };
+  changeTitleFinal = () => {
+    this.props.changeTitle(this.state.newTitleInput, this.props.column.id);
+    this.setState({changeTitle: false})
+  }
 
   render() {
     return (
@@ -140,11 +148,26 @@ class Column extends Component {
           >
             <ColumnHeader>
               <Title {...provided.dragHandleProps}>
-                <FiEdit3
-                  style={{ marginRight: "5%" }}
-                  onClick={this.editColumnName}
-                />
-                {this.props.column.title}
+                {this.state.changeTitle ? (
+                  <GiSaveArrow
+                    style={{ marginRight: "5%" }}
+                    onClick={this.changeTitleFinal}
+                  />
+                ) : (
+                  <FiEdit3
+                    style={{ marginRight: "5%" }}
+                    onClick={this.editColumnName}
+                  />
+                )}
+                {!this.state.changeTitle ? (
+                  this.props.column.title
+                ) : (
+                  <input
+                    placeholder={this.props.column.title}
+                    value={this.state.newTitleInput}
+                    onChange={this.handleTitleInput}
+                  />
+                )}
               </Title>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <FiPlus
