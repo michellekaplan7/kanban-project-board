@@ -38,7 +38,6 @@ const Container = styled.div`
   flex-direction: row;
   border: 1px solid lightgrey;
   overflow-x: scroll;
-  width: 80%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -174,7 +173,8 @@ class Board extends Component {
 
   // ADD A TASK
   addNewTaskToColumnList = (userInput) => {
-    let taskCounter = Object.keys(this.state.tasks).length + 1
+    let taskCounter = Date.now()
+    // let taskCounter = Object.keys(this.state.tasks).length + 1
     
     let testObj = {
       ...this.state.tasks,
@@ -220,8 +220,27 @@ class Board extends Component {
     })
   }
 
+  deleteTask = (task, columnID) => {
+    let currentTasks = { ...this.state.tasks }
+    let object = {}
+    for (let key in currentTasks) {
+      if (key !== task) {
+        object[key] =  currentTasks[key]
+      }
+    }
+    console.log(object);
+    let updatedColumns = {...this.state.columns}
+    let filtered = updatedColumns[columnID].taskIds.filter(item => item !== task)
+    let newColumns = {
+      ...this.state.columns,
+    }
+    newColumns[columnID].taskIds = filtered
+    this.setState({tasks: object, columns: newColumns})
+  }
+
 
   render() {
+    console.log(this.state);
     return (
       <MainContainerToBoard>
         <DragDropContext
@@ -245,6 +264,7 @@ class Board extends Component {
                     column={column}
                     taskMap={this.state.tasks}
                     index={index}
+                    deleteTask={this.deleteTask}
                     addNewTaskToColumnList={this.addNewTaskToColumnList}
                   />
                 );
