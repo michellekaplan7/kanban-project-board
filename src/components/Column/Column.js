@@ -15,7 +15,7 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   background-color: white;
   border-radius: 2px;
-  width: 220px;
+  width: 250px;
   display: flex;
   flex-direction: column;
 `;
