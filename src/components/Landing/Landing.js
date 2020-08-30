@@ -4,12 +4,13 @@ import styled from "styled-components";
 const MainLandingContainer = styled.div`
   width: 50em;
   margin: 0 auto;
+  background-color: white;
 `;
 
 const Header = styled.section`
   padding: 20px;
 	margin-bottom: 40px;
-	background-color: #fff;
+	background-color: #B298DC;
 	@include border-radius(4px);
 	@include box-shadow(0 1px 0 rgba(0,0,0,.2));
 `;
