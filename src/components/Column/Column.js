@@ -5,7 +5,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import InnerList from "../InnerList/InnerList";
 
 //Icons
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus, FiEdit3, FiDelete } from "react-icons/fi";
 
 //Imports
 import Modal from 'react-modal';
@@ -22,6 +22,8 @@ const Container = styled.div`
 
 const Title = styled.h3`
   padding: 8px;
+  display: flex;
+  width: 80%;
 `;
 
 const TaskList = styled.div`
@@ -66,94 +68,164 @@ let subtitle;
 
 class Column extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       addTaskModal: false,
+      deleteColumn: false,
       newTaskInput: "",
-      errorOnAdd: false
-    }
+      errorOnAdd: false,
+    };
   }
 
   componentDidMount = () => {
     Modal.setAppElement("#columnHeader");
-  }
+  };
 
   addTask = () => {
-  this.setState({addTaskModal: true})
-  }
+    this.setState({ addTaskModal: true });
+  };
 
   handleInput = (e) => {
-    const { value } = e.target
-    this.setState({newTaskInput: value})
-  }
+    const { value } = e.target;
+    this.setState({ newTaskInput: value });
+  };
 
   closeModal = () => {
-    this.setState({addTaskModal: false});
-  }
+    this.setState({ addTaskModal: false, deleteColumn: false });
+  };
 
   afterOpenModal = () => {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = '#a663cc';
-  }
+    subtitle.style.color = "#a663cc";
+  };
 
   addNewTaskToColumn = () => {
-    this.setState({errorOnAdd: false})
+    this.setState({ errorOnAdd: false });
     if (!this.state.newTaskInput) {
-      this.setState({errorOnAdd: true})
-      return
+      this.setState({ errorOnAdd: true });
+      return;
     }
     let userObj = {
       content: this.state.newTaskInput,
-      id: this.props.column.id
-    }
-    this.props.addNewTaskToColumnList(userObj)
+      id: this.props.column.id,
+    };
+    this.props.addNewTaskToColumnList(userObj);
 
-    this.setState({addTaskModal: false, newTaskInput: ""});
-  }
+    this.setState({ addTaskModal: false, newTaskInput: "" });
+  };
+
+  editColumnName = () => {
+    console.log("edit column name");
+  };
+
+  deleteColumn = () => {
+    this.setState({ deleteColumn: true });
+    console.log("delete column name");
+  };
+
+
+  // deleteColumnFinal = () => {
+  //   console.log("delete column final");
+  //   this.props.deleteColumn()    
+  // };
 
   render() {
     return (
       <Draggable draggableId={this.props.column.id} index={this.props.index}>
         {(provided) => (
-          <Container id="columnHeader" {...provided.draggableProps} ref={provided.innerRef}>
+          <Container
+            id="columnHeader"
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+          >
             <ColumnHeader>
               <Title {...provided.dragHandleProps}>
+                <FiEdit3
+                  style={{ marginRight: "5%" }}
+                  onClick={this.editColumnName}
+                />
                 {this.props.column.title}
               </Title>
-              <FiPlus style={{"marginRight":"5%"}} onClick={this.addTask}/>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <FiPlus
+                  style={{ marginRight: "5%", fontSize: "1.5em" }}
+                  onClick={this.addTask}
+                />
+                <FiDelete
+                  style={{ marginRight: "5%", fontSize: "1.5em" }}
+                  onClick={this.deleteColumn}
+                />
+              </div>
             </ColumnHeader>
 
-            {
-            this.state.addTaskModal
-            &&
-            <Modal
-              isOpen={this.state.addTaskModal}
-              onAfterOpen={this.afterOpenModal}
-              onRequestClose={this.closeModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-              <h2 ref={_subtitle => (subtitle = _subtitle)}>How YOU Doin?</h2>
-              {this.state.errorOnAdd && <p style={{"color": "red"}} >Please enter a new task</p>}
-              <label>Enter a new Task</label>
-              <input
-                placeholder="add new task"
-                type="text"
-                onChange={this.handleInput}
-                value={this.state.newTaskInput}
-              />
-              <ButtonWrapper>
-                <input onClick={this.addNewTaskToColumn}
-                type="submit"
-                value="add"
-                style={{"margin": "5%", "width": "8em", "height": "2.5em"}}/>
-                <input onClick={this.closeModal}
-                type="submit"
-                value="close"
-                style={{"margin": "5%", "width": "8em", "height": "2.5em"}}/>
-              </ButtonWrapper>
-            </Modal>
-            }
+            {this.state.addTaskModal && (
+              <Modal
+                isOpen={this.state.addTaskModal}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+                  How YOU Doin?
+                </h2>
+                {this.state.errorOnAdd && (
+                  <p style={{ color: "red" }}>Please enter a new task</p>
+                )}
+                <label>Enter a new Task</label>
+                <input
+                  placeholder="add new task"
+                  type="text"
+                  onChange={this.handleInput}
+                  value={this.state.newTaskInput}
+                />
+                <ButtonWrapper>
+                  <input
+                    onClick={this.addNewTaskToColumn}
+                    type="submit"
+                    value="add"
+                    style={{ margin: "5%", width: "8em", height: "2.5em" }}
+                  />
+                  <input
+                    onClick={this.closeModal}
+                    type="submit"
+                    value="close"
+                    style={{ margin: "5%", width: "8em", height: "2.5em" }}
+                  />
+                </ButtonWrapper>
+              </Modal>
+            )}
+            {this.state.deleteColumn && (
+              <Modal
+                isOpen={this.state.deleteColumn}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+                  All tasks in the column and column will be deleted.
+                </h2>
+
+                <p>Are You Sure?</p>
+                <ButtonWrapper>
+                  <input
+                    onClick={() =>
+                      this.props.deleteColumn(this.props.column.id)
+                    }
+                    type="submit"
+                    value="DELETE"
+                    style={{ margin: "5%", width: "8em", height: "2.5em" }}
+                  />
+                  <input
+                    onClick={this.closeModal}
+                    type="submit"
+                    value="CANCEL"
+                    style={{ margin: "5%", width: "8em", height: "2.5em" }}
+                  />
+                </ButtonWrapper>
+              </Modal>
+            )}
 
             <Droppable droppableId={this.props.column.id} type="task">
               {(provided, snapshot) => (
@@ -162,7 +234,11 @@ class Column extends Component {
                   {...provided.droppableProps}
                   isDraggingOver={snapshot.isDraggingOver}
                 >
-                  <InnerList tasks={this.props.tasks} columnID={this.props.column.id} deleteTask={this.props.deleteTask} />
+                  <InnerList
+                    tasks={this.props.tasks}
+                    columnID={this.props.column.id}
+                    deleteTask={this.props.deleteTask}
+                  />
                   {provided.placeholder}
                 </TaskList>
               )}
