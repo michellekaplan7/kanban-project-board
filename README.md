@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Monarch_Board
 
-## Available Scripts
+The Monarch_Board was a 3 day MintBean Hackathon project for the JavaScript Bootcamp Olympics! We were tasked to create a kanban board, focusing on an intuitive UX! A kanban board is an agile project management tool that helps a user visualize their todos and progress. From the kanban board, the user can add/delete tasks and columns, rename columns, and reorder tasks/columns.
 
-In the project directory, you can run:
+Our board was implemented using React, using create-react-app, and react-beautiful-dnd for the the drag-and-drop feature. We also implemented react-modal for our modal integration upon adding new tasks and columns. 
 
-### `npm start`
+Let's get organized!
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![kanban_board_screenshot](https://user-images.githubusercontent.com/56200182/91671846-51dcef00-eae7-11ea-8427-a239b80702eb.png)
 
-### `npm test`
+## Deployed at
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Setup
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone down this repo
+2. Install the library dependencies. Run: 
+```
+npm install
+```
+3. Then, run `npm start` in your terminal. Go to `http://localhost:3000/` and you should see the page there! Then, you can enter `control + c` in your terminal to stop the server at any time.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Technologies Used
+- React
+- create-react-app
+- Router
+- react-beautiful-dnd
+- react-modal
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Future Iterations
+- Expand a task card to see its description
+- Move tasks between columns using the "Move" button in the context menu
+- Mobile-responsiveness
+- Each card has a context menu you can access through right-click (desktop).
+- Each card has a context menu you can access through long-press (mobile).
+- Nice animations
+- Access the context menu using right-click
+- Add images as attachments to the cards
+- Save data to LocalStorage or IndexedDB
+- Onboarding tutorial
+- Help text
+- Info bubbles
+- Helpful hints
+- Clear notifications
 
-### `npm run eject`
+## Contributors:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[Quinn Elder] (https://github.com/QuinnrElder)
+[Michelle Kaplan](https://github.com/MichelleKaplan7)
+[Nick Taylor] (https://github.com/nickstaylor)
