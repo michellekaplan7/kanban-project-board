@@ -5,10 +5,10 @@ import styled from "styled-components";
 
 const Container = styled.div`
 width: 100%;
-height: 18em;
+height: 20%;
 background-color: #a663cc;
 text-align: center;
-position: relative;
+
 position: fixed;
 top: 0;
 overflow: hidden;
@@ -18,7 +18,7 @@ overflow: hidden;
 const HeaderTitle = styled.p`
 font-size: 3em;
 color: #b9faf8;
-line-height: 5.5em;
+line-height: 2.5em;
 text-transform: uppercase;
 font-weight: 250;
 @include transition(all .3s ease);
