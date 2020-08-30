@@ -10,7 +10,7 @@ import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
 const Body = styled.div`
-background-color: #ecf0f1;
+background-color: white;
 font-family: helvetica, arial, sans-serif;
 font-size: 16px;
 margin-top: 25%;
