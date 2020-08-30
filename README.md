@@ -1,6 +1,6 @@
 # Monarch_Board
 
-The Monarch_Board was a 3 day MintBean Hackathon project for the [JavaScript Bootcamp Olympics] (https://sites.google.com/mintbean.io/javascriptbootcampolympics/home?authuser=0)! We were tasked to create a kanban board, focusing on an intuitive UX! A kanban board is an agile project management tool that helps a user visualize their todos and progress. From the kanban board, the user can add/delete tasks and columns, rename columns, and reorder tasks/columns.
+The Monarch_Board was a 3 day MintBean Hackathon project for the [JavaScript Bootcamp Olympics](https://sites.google.com/mintbean.io/javascriptbootcampolympics/home?authuser=0)! We were tasked to create a kanban board, focusing on an intuitive UX! A kanban board is an agile project management tool that helps a user visualize their todos and progress. From the kanban board, the user can add/delete tasks and columns, rename columns, and reorder tasks/columns.
 
 Our board was implemented using React, using create-react-app, and react-beautiful-dnd for the the drag-and-drop feature. We also implemented react-modal for our modal integration upon adding new tasks and columns. 
 
