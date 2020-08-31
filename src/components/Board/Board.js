@@ -16,6 +16,7 @@ flex-direction: row;
 align-self: center;
 justify-content: center;
 width: 100%;
+position: fixed;
 `;
 
 const AddColumnContainer = styled.div`
