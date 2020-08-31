@@ -1,5 +1,4 @@
 import React from "react";
-// import "./App.css";
 import "@atlaskit/css-reset";
 import Header from "../Header/Header";
 import Landing from "../Landing/Landing";
@@ -16,6 +15,7 @@ const Body = styled.div`
   margin-top: 15%;
   @include transition(padding-top 0.5s ease);
 `;
+
 function App() {
   return (
     <div className="App">
