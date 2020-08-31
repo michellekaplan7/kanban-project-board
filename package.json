@@ -2,7 +2,7 @@
   "name": "kanban-project-board",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://michellekaplan7.github.io/kanban-project-board/",
+  "homepage": "https://michellekaplan7.github.io/kanban-project-board",
   "dependencies": {
     "@atlaskit/css-reset": "^6.0.1",
     "@testing-library/jest-dom": "^4.2.4",
